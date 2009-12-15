@@ -5,6 +5,7 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import br.lusoft.starmania.base.Rectangle;
 import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.lcdui.game.Sprite;
 
 
 public class Runner extends GameCanvas implements Runnable
@@ -15,6 +16,7 @@ public class Runner extends GameCanvas implements Runnable
     private Rectangle screenBounds;
     private int counter = 0;
     private StringBuffer buffer;
+    private Sprite starSprite;
 
 
     public Runner(Display display)
@@ -23,7 +25,6 @@ public class Runner extends GameCanvas implements Runnable
         this.display = display;
         this.graphics = getGraphics();
         this.screenBounds = new Rectangle(0, 0, getWidth(), getHeight());
-        this.buffer = new StringBuffer();
     }
 
     public void start()
@@ -51,11 +52,11 @@ public class Runner extends GameCanvas implements Runnable
 
     public void paint(Graphics g)
     {
-        g.setColor(Color.Black);
+        g.setColor(Color.Black.getValue());
         g.fillRect(0, 0, screenBounds.getWidth(), screenBounds.getHeight());
-        g.setColor(Color.Yelllow);
+        g.setColor(Color.Yellow.getValue());
         g.fillRect(50, 50, 20, 20);
-        g.setColor(Color.Red);
+        g.setColor(Color.Red.getValue());
         g.drawString(buffer.toString(), screenBounds.getWidth() / 2, screenBounds.getHeight() / 2, Graphics.HCENTER | Graphics.BASELINE);
         flushGraphics();
     }
