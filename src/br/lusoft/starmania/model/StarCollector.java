@@ -1,20 +1,12 @@
 package br.lusoft.starmania.model;
 
-import br.lusoft.starmania.base.GameTime;
-import br.lusoft.starmania.base.Rectangle;
-import javax.microedition.lcdui.Graphics;
 
-public class StarCollector extends GameObject
+public class StarCollector
 {
+    private String name;
 
-    public void draw(Graphics g, Rectangle bounds)
+    public StarCollector(String name)
     {
-        
+        this.name = name;
     }
-
-    public void update(GameTime gameTime)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }
