@@ -3,16 +3,16 @@ package br.lusoft.starmania.core;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
 
-public class Launcher extends MIDlet
+public class GameLauncher extends MIDlet
 {
-    private static Launcher instance = null;
+    private static GameLauncher instance = null;
 
-    public Launcher()
+    public GameLauncher()
     {
         instance = this;
     }
 
-    public static Launcher getInstance()
+    public static GameLauncher getInstance()
     {
         return instance;
     }
@@ -20,16 +20,16 @@ public class Launcher extends MIDlet
     public void startApp() 
     {
         Display display = Display.getDisplay(this);
-        Runner testScreen = new Runner(display);
+        Game game = new Game();
         
-        display.setCurrent(testScreen);
-        testScreen.start();
+        display.setCurrent(game);
+        game.start();
         
     }
 
     public void pauseApp() 
     {
-        System.out.println("Pausing...");
+    
     }
 
     public void destroyApp(boolean unconditional) 

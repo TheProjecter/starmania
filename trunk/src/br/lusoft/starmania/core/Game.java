@@ -1,30 +1,30 @@
 package br.lusoft.starmania.core;
 
 import br.lusoft.starmania.base.Color;
-import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import br.lusoft.starmania.base.Rectangle;
+import br.lusoft.starmania.model.Star;
 import javax.microedition.lcdui.game.GameCanvas;
-import javax.microedition.lcdui.game.Sprite;
 
 
-public class Runner extends GameCanvas implements Runnable
-{
-    private Display display;
+public class Game extends GameCanvas implements Runnable
+{        
+    private Star star;
     private Graphics graphics;
-    private boolean gameRunning = false;
     private Rectangle screenBounds;
-    private int counter = 0;
-    private StringBuffer buffer;
-    private Sprite starSprite;
+
+    private boolean gameRunning = false;
 
 
-    public Runner(Display display)
+    public Game()
     {
         super(false);
-        this.display = display;
         this.graphics = getGraphics();
         this.screenBounds = new Rectangle(0, 0, getWidth(), getHeight());
+        
+        star = new Star();
+        star.setPosition(20, 20);
+        
     }
 
     public void start()
@@ -40,10 +40,6 @@ public class Runner extends GameCanvas implements Runnable
         {
             while (gameRunning)
             {
-                counter++;
-                buffer.delete(0, buffer.length());
-                buffer.append("Run: ");
-                buffer.append(counter);
                 paint(graphics);
             }
         }
@@ -54,21 +50,16 @@ public class Runner extends GameCanvas implements Runnable
     {
         g.setColor(Color.Black.getValue());
         g.fillRect(0, 0, screenBounds.getWidth(), screenBounds.getHeight());
-        g.setColor(Color.Yellow.getValue());
-        g.fillRect(50, 50, 20, 20);
-        g.setColor(Color.Red.getValue());
-        g.drawString(buffer.toString(), screenBounds.getWidth() / 2, screenBounds.getHeight() / 2, Graphics.HCENTER | Graphics.BASELINE);
+        star.draw(g);
         flushGraphics();
     }
-
-
 
     protected void keyPressed(int keyCode)
     {
         if (getGameAction(keyCode) == FIRE)
         {
             gameRunning = false;
-            Launcher launcher = Launcher.getInstance();
+            GameLauncher launcher = GameLauncher.getInstance();
             launcher.destroyApp(true);
             launcher.notifyDestroyed();
         }
